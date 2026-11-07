@@ -1,0 +1,417 @@
+/* PROJECT PAGE — art-directed scatter + shrinking video
+   Customise:
+   - --stage-scroll-length: how long the animation takes
+   - each image's --x, --y, --size and --delay in the HTML
+   - colours below to match the rest of your portfolio */
+
+:root {
+  --page-bg: #080a0f;
+  --text: #f5f7fb;
+  --muted: #aab2c1;
+  --accent: #7eacfb;
+  --line: rgba(255, 255, 255, 0.16);
+  --stage-scroll-length: 190vh;
+  --page-gutter: clamp(1.1rem, 4vw, 4.5rem);
+  --mono: "Courier New", Courier, monospace;
+  --sans: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  background: var(--page-bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      ellipse at 50% 34%,
+      rgba(50, 76, 120, 0.13),
+      transparent 52%
+    ),
+    var(--page-bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+.project-header {
+  position: relative;
+  z-index: 5;
+  width: min(100%, 1050px);
+  margin-inline: auto;
+  padding: 1.5rem var(--page-gutter) 3rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.back-link:hover,
+.back-link:focus-visible {
+  color: var(--accent);
+}
+.eyebrow {
+  margin: 2.7rem 0 0.65rem;
+  color: var(--accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(2.8rem, 8vw, 7.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+  font-family: Helvetica;
+}
+
+.project-intro {
+  /* max-width: 1000px; */
+  margin: 1.5rem 0 1.4rem;
+  color: #d5dae4;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+}
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.project-meta li {
+  display: grid;
+  gap: 0.15rem;
+}
+.project-meta span {
+  color: var(--text);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Tall section creates scroll distance; stage-sticky stays in the viewport. */
+.reveal-stage {
+  position: relative;
+  height: var(--stage-scroll-length);
+  min-height: 1500px;
+  isolation: isolate;
+}
+.stage-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 540px;
+  overflow: hidden;
+  perspective: 1200px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(126, 172, 251, 0.08),
+    transparent 58%
+  );
+}
+
+/* The video starts large. JS scales the frame down; it does not pause playback. */
+.feature-video {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: min(90vw, 1500px);
+  height: min(78svh, 850px);
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  background: #111722;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.45);
+  will-change: transform;
+}
+.feature-video__media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #111722;
+}
+.video-caption {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 10px #000;
+  pointer-events: none;
+}
+
+/* Every image has its own coordinates and reveal timing: deliberately irregular. */
+.scatter-gallery {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+}
+.scatter-item {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: var(--size);
+  margin: 0;
+  opacity: 0;
+  transform: translate3d(0, 35px, -80px) scale(0.72);
+  transform-origin: center;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.28));
+  scale: 1.2;
+}
+.scatter-item img {
+  display: block;
+  width: 100%;
+  /* height: 17vh; */
+  aspect-ratio: var(--ratio, 4 / 3);
+  object-fit: cover;
+  /* object-fit: fill; */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #171c27;
+}
+
+.scatter-item figcaption {
+  padding-top: 0.5rem;
+  color: rgba(245, 247, 251, 0.75);
+  font-size: 0.64rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.info-button {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  background: rgba(8, 10, 15, 0.72);
+  color: white;
+  font: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+.info-button:hover,
+.info-button:focus-visible {
+  background: var(--accent);
+  color: #080a0f;
+  transform: scale(1.06);
+  outline: none;
+}
+.scroll-hint {
+  position: absolute;
+  z-index: 6;
+  right: var(--page-gutter);
+  bottom: 1.4rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+}
+.scroll-hint span {
+  padding-left: 0.5rem;
+  color: var(--accent);
+}
+.project-footer {
+  display: flex;
+  /* justify-content: center; */
+  padding: 2rem var(--page-gutter) 2rem;
+  margin-top: 2rem;
+  /* border-top: 1px solid var(--line); */
+}
+.project-footer .back-link {
+  color: var(--text);
+}
+
+/* Native dialog makes image notes keyboard-accessible and avoids many separate popovers. */
+.image-popover {
+  width: min(420px, calc(100vw - 2rem));
+  margin: auto;
+  padding: 1.6rem;
+  border: 1px solid rgba(126, 172, 251, 0.45);
+  border-radius: 8px;
+  background: #10141d;
+  color: var(--text);
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.65);
+}
+.image-popover::backdrop {
+  background: rgba(0, 0, 0, 0.68);
+  backdrop-filter: blur(5px);
+}
+.image-popover .eyebrow {
+  margin: 0 0 0.6rem;
+}
+.image-popover h2 {
+  margin: 0 2rem 0.6rem 0;
+  font-size: 1.4rem;
+}
+.image-popover p:last-child {
+  margin-bottom: 0;
+  color: #d5dae4;
+}
+.popover-close {
+  float: right;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Tablet adjustments keep the collage within the viewport. */
+@media (max-width: 900px) {
+  :root {
+    --stage-scroll-length: 165vh;
+  }
+  .reveal-stage {
+    min-height: 1250px;
+  }
+  .feature-video {
+    width: 92vw;
+    height: min(68svh, 650px);
+  }
+  .scatter-item {
+    width: min(var(--size), 24vw);
+  }
+  .scatter-item:nth-child(5) {
+    top: 4%;
+    left: 36%;
+  }
+  .scatter-item:nth-child(6) {
+    top: 78%;
+    left: 56%;
+  }
+  .scatter-item:nth-child(7) {
+    top: 83%;
+    left: 35%;
+  }
+}
+
+/* Mobile uses smaller tiles and a calmer arrangement to reduce overlap. */
+@media (max-width: 600px) {
+  :root {
+    --stage-scroll-length: 145vh;
+    --page-gutter: 1.1rem;
+  }
+  .project-header {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  .eyebrow {
+    margin-top: 2rem;
+  }
+  .project-meta {
+    gap: 0.8rem 1.1rem;
+  }
+  .reveal-stage {
+    min-height: 1050px;
+  }
+  .stage-sticky {
+    min-height: 500px;
+  }
+  .feature-video {
+    width: 94vw;
+    height: 52svh;
+    border-radius: 3px;
+  }
+  .scatter-item {
+    width: clamp(88px, 27vw, 145px);
+  }
+  .scatter-item figcaption {
+    font-size: 0.55rem;
+    letter-spacing: 0.07em;
+  }
+  .scatter-item:nth-child(1) {
+    top: 14%;
+    left: 3%;
+  }
+  .scatter-item:nth-child(2) {
+    top: 11%;
+    left: 68%;
+  }
+  .scatter-item:nth-child(3) {
+    top: 61%;
+    left: 2%;
+  }
+  .scatter-item:nth-child(4) {
+    top: 58%;
+    left: 70%;
+  }
+  .scatter-item:nth-child(5) {
+    top: 5%;
+    left: 37%;
+  }
+  .scatter-item:nth-child(6) {
+    top: 77%;
+    left: 54%;
+  }
+  .scatter-item:nth-child(7) {
+    top: 82%;
+    left: 30%;
+  }
+  .info-button {
+    width: 29px;
+    height: 29px;
+    top: 0.35rem;
+    right: 0.35rem;
+  }
+  .scroll-hint {
+    right: 1rem;
+    bottom: 0.9rem;
+    font-size: 0.62rem;
+  }
+  .project-footer {
+    padding-bottom: 3rem;
+  }
+}
+
+/* Keep the final composition usable for visitors who request less motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .scatter-item,
+  .feature-video {
+    will-change: auto;
+  }
+}
