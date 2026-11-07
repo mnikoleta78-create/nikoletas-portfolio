@@ -1,0 +1,431 @@
+/* ABOUT PAGE
+   The homepage stylesheet provides the shared HUD frame, brackets, typography
+   and wordmark. This file only styles the About page content. */
+:root {
+  --page-bg: #080a0f;
+  --text: #f5f7fb;
+  --muted: #aab2c1;
+  --accent: #7eacfb;
+  --line: rgba(255, 255, 255, 0.16);
+  --stage-scroll-length: 190vh;
+  --page-gutter: clamp(1.1rem, 4vw, 4.5rem);
+  --mono: "Courier New", Courier, monospace;
+  --sans: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      ellipse at 50% 34%,
+      rgba(50, 76, 120, 0.13),
+      transparent 52%
+    ),
+    var(--page-bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* .wordmark{
+  margin-top: 50px;
+}
+ */
+
+.project-header {
+  position: relative;
+  z-index: 5;
+  width: min(100%, 1050px);
+  margin-inline: auto;
+  padding: 1.5rem var(--page-gutter) 3rem;
+}
+
+.about-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 76% 24%, #468aff, transparent 38%),
+    var(--dark-void);
+}
+.about-shell .screen-shade {
+  position: absolute;
+  background: linear-gradient(180deg, #7eacfb, #2e66c7);
+}
+.about-frame {
+  min-height: calc(100vh - 48px);
+}
+.about-header {
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+.about-header .header-note {
+  text-align: right;
+}
+.about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  padding: 0 4% clamp(5rem, 10vw, 9rem);
+  width: 100%;
+  min-width: 0;
+}
+.about-copy {
+  max-width: 800px;
+  min-width: 0;
+}
+
+.about-copy .eyebrow {
+  margin-bottom: 1.2rem;
+  right: 2vw;
+}
+
+.about-copy h1 {
+  max-width: 850px;
+  font-size: clamp(2.8rem, 6.4vw, 6.5rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.065em;
+  /* text-wrap: balance; */
+}
+.about-lead,
+.about-personal {
+  max-width: 650px;
+  color: #c9c6d7;
+}
+.about-lead {
+  margin-top: 1.5rem;
+}
+.about-personal {
+  margin-top: 1rem;
+  color: var(--muted);
+}
+
+/* Image placeholder: replace this div with an img element when ready. */
+img {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  min-height: clamp(320px, 43vw, 600px);
+  min-height: 20vh;
+  max-width: 500px;
+  padding: 2rem;
+  padding-right: 2rem;
+  border: 1px solid var(--hud-line);
+  font-size: 0.7rem;
+  right: 2vw;
+}
+
+.about-image {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+
+  height: 700px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+
+  justify-self: center;
+  min-width: 0;
+
+  border: 1px solid var(--hud-line);
+}
+
+.about-section {
+  padding: clamp(3.5rem, 7vw, 6.5rem) 4%;
+  border-top: 1px solid var(--hud-line);
+}
+.section-heading {
+  /* display: grid; */
+  /* grid-template-columns: minmax(160px, 0.65fr) minmax(0, 1.35fr); */
+  /* display: block; */
+  display: flex;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 2.8rem;
+}
+.section-heading .eyebrow {
+  display: flex;
+  
+  margin: 0.4rem 0 0;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+.section-heading h2,
+.contact-section h2 {
+  max-width: 780px;
+  font-size: clamp(2rem, 4.2vw, 4.3rem);
+  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
+.experience-entry {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.65fr) minmax(0, 1.35fr);
+  gap: 2rem;
+  padding: 1.7rem 0;
+  border-top: 1px solid #7eacfb38;
+}
+.experience-date {
+  padding-top: 0.35rem;
+  color: var(--neon-green);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+}
+.experience-entry h3,
+.skill-group h3 {
+  margin-bottom: 0.65rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+.experience-entry p,
+.skill-group p,
+.learning-intro,
+.learning-list {
+  color: #c6d7ce;
+  font: 0.96rem/1.8 var(--sans);
+}
+.experience-entry p {
+  max-width: 760px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid #7eacfb;
+  background: #7eacfb;
+}
+.skill-group {
+  min-height: 220px;
+  padding: clamp(1.3rem, 3vw, 2.4rem);
+  background: rgba(2, 3, 12, 0.9);
+}
+.skill-group p {
+  max-width: 540px;
+}
+.skill-tools {
+  display: inline-block;
+  margin-top: 1.2rem;
+  color: var(--neon-green);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+
+.learning-section {
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+.learning-intro {
+  max-width: 760px;
+  margin: 0 0 1.5rem;
+}
+.learning-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 2.5rem;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.learning-list li::marker {
+  color: var(--neon-green);
+}
+
+.contact-section {
+  padding: clamp(3.5rem, 8vw, 7rem) 4%;
+  border-top: 1px solid var(--hud-line);
+  background: linear-gradient(135deg, rgba(0, 17, 255, 0.06), transparent 62%);
+}
+.contact-section .eyebrow {
+  margin-bottom: 1.2rem;
+}
+.contact-section h2 {
+  max-width: 850px;
+}
+.contact-section > p:not(.eyebrow) {
+  margin-top: 1rem;
+  color: #c6d7ce;
+  font: 1rem/1.7 var(--sans);
+}
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.7rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--neon-green);
+  color: var(--neon-green);
+  font-size: clamp(1rem, 2.2vw, 1.5rem);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.contact-email span {
+  transition: transform 0.2s ease;
+}
+.contact-email:hover span {
+  transform: translate(3px, -3px);
+}
+
+.about-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.8rem 4% 0.8rem;
+  border-top: 1px solid rgba(0, 4, 255, 0.16);
+}
+.back-home {
+  color: var(--text);
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+/* Main About Me title — matches project-page typography */
+.about-title {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(2.8rem, 8vw, 7.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* EYEBROW */
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.back-home:hover {
+  color: var(--neon-green);
+}
+
+.contact-email{
+  color: #7eacfb;
+}
+
+@media (max-width: 1250x){
+ 
+  .portrait-placeholder {
+    min-height: 420px;
+    max-width: 620px;
+    width: 100%;
+  }
+  .section-heading {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}
+
+/* Tablet and phone layouts stack content while preserving comfortable spacing. */
+@media (max-width: 900px) {
+  .about-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 0.65fr);
+    gap: 2rem;
+    padding-inline: 2%;
+  }
+
+  .about-hero p {
+    margin-right: 2rem;
+  }
+  .about-image {
+    max-width: 400px;
+    max-height: 600px;
+  }
+
+  .portrait-placeholder {
+    min-height: 420px;
+    max-width: 620px;
+    width: 100%;
+  }
+  .section-heading {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}
+
+
+@media (max-width: 760px) {
+  .about-frame {
+    width: calc(100% - 24px);
+    min-height: calc(100vh - 24px);
+    margin: 12px auto;
+    padding: 20px 16px;
+  }
+  .about-header {
+    align-items: flex-start;
+    padding-bottom: 3.5rem;
+  }
+  .about-header .header-note {
+    max-width: 120px;
+    line-height: 1.6;
+  }
+ .about-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    padding-inline: 5%;
+    /* text-align: center; */
+  }
+  
+  .portrait-placeholder {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 700px) {
+  .about-frame {
+    width: calc(100% - 24px);
+    min-height: calc(100vh - 24px);
+    margin: 12px auto;
+    padding: 20px 16px;
+  }
+  .about-header {
+    align-items: flex-start;
+    padding-bottom: 3.5rem;
+  }
+  .about-header .header-note {
+    max-width: 120px;
+    line-height: 1.6;
+  }
+ .about-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    padding-inline: 5%;
+    /* text-align: center; */
+  }
+  
+  .portrait-placeholder {
+    min-height: 320px;
+  }
+  .about-section,
+  .contact-section {
+    padding-inline: 2%;
+  }
+  .experience-entry {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+  .skills-grid,
+  .learning-list {
+    grid-template-columns: 1fr;
+  }
+  .skill-group {
+    min-height: 0;
+  }
+  .about-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-inline: 2%;
+  }
+}

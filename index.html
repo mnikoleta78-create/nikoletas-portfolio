@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Media Design and UX/UI portfolio.">
+  <title>Nikoleta</title>
+  <!-- <link rel="stylesheet" href="every-style.css"> -->
+  <link rel="stylesheet" href="./homepage_only/style.css">
+</head>
+<body>
+  <div class="site-shell">
+    <!-- Full-screen video layer. JavaScript changes the source on project hover. -->
+    <div class="cinematic-bg" aria-hidden="true">
+      <video id="background-video" class="video-layer is-visible"
+            muted loop playsinline preload="metadata"></video>
+      <video id="background-video-next" class="video-layer"
+            muted loop playsinline preload="metadata"></video>
+    </div>
+
+
+    <!-- Decorative overlay layers: subtle scanlines and dark gradient for legibility. -->
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="screen-shade" aria-hidden="true"></div>
+
+    <!-- HUD frame and corner brackets. -->
+    <main class="hud-frame">
+      <span class="bracket tl" aria-hidden="true"></span>
+      <span class="bracket tr" aria-hidden="true"></span>
+      <span class="bracket bl" aria-hidden="true"></span>
+      <span class="bracket br" aria-hidden="true"></span>
+
+      <!-- Header -->
+      <header class="site-header">
+        <a class="wordmark" href="./index.html">NIKOLETA</a>
+        <p class="header-note">MEDIA DESIGN · UX/UI</p>
+      </header>
+
+      <section class="home-layout" aria-label="Portfolio homepage">
+        <!-- Main title changes to match the project currently being previewed. -->
+        <div class="hero-copy" id="hero-copy" aria-live="polite">
+          <p class="eyebrow">SELECTED WORK / 2026</p>
+          <h1 id="project-title">Designing thoughtful digital experiences.</h1>
+          <p class="hero-description" id="project-description">
+            I create intuitive interfaces and visual experiences, combining user-centered design with a technical understanding of digital products.
+          </p>
+          <p class="project-status" id="project-status">PORTFOLIO / OVERVIEW</p>
+        </div>
+
+        <!-- Project navigation.
+             ACTION: Change each title, description, href, and video path to your own.
+             The href should point to each project's future HTML page. -->
+        <nav class="project-navigation" aria-label="Projects">
+          <p class="nav-heading">SELECT A PROJECT <span>↘</span></p>
+          <ul class="project-list">
+            
+            <!-- DIGITAL DESIGN EXP -->
+            <li style="--i: 1">
+              <a class="project-button is-active"
+                 href="../project_page_template_v2/project-1.html"
+                 data-number="01"
+                 
+                 data-title="Designing digital experiences."
+                 data-description="Projects focused on making digital interactions clear, useful, and engaging."
+                 data-video="./homepage_only/videos/project-idk5.mp4"
+                 aria-current="true">
+                <span class="button-index">01</span>
+                <span class="button-label">Various Small Projects</span>
+                <span class="button-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+
+            <!-- VISUAL STORIES WITH PURPOSE -->
+            <li style="--i: 2">
+              <a class="project-button"
+                 href="../project_page_template_v2/project-2.html"
+                 data-number="02"
+
+                 data-title="Visual stories with purpose."
+                 data-description="A visual communication project combining concept, composition, and storytelling."
+                 data-video="./homepage_only/videos/project-idk4.mp4">
+                <span class="button-index">02</span>
+                <span class="button-label">LiveWall Project</span>
+                <span class="button-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+
+            <!-- Making complex information easier to use. -->
+            <li style="--i: 3">
+              <a class="project-button"
+                 href="../project_page_template_v2/project-3.html"
+                 data-number="03"
+
+                 data-title="Taking first steps into branding"
+                 data-description="A look into logo and brand development"
+                 data-video="./homepage_only/videos/project-idk10.mp4">
+                <span class="button-index">03</span>
+                <span class="button-label">Aurora Project</span>
+                <span class="button-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+
+            <!-- Exploring ideas through design. -->
+            <li style="--i: 4">
+              <a class="project-button"
+                 href="../project_page_template_v2/project-4.html"
+                 data-number="04"
+
+                 data-title="Exploring ideas through design."
+                 data-description="An experimental project exploring a concept through digital design."
+                 data-video="./homepage_only/videos/project-idk7.mp4">
+                <span class="button-index">04</span>
+                <span class="button-label">Breda Media Campaign</span>
+                <span class="button-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+
+
+          </ul>
+          <p class="nav-hint">HOVER TO PREVIEW · SELECT TO OPEN</p>
+        </nav>
+      </section>
+
+      <!-- About and Contact both lead to the same page, as requested. -->
+      <footer class="site-footer">
+        <div class="footer-actions">
+          <!-- About me -->
+          <a class="btn btn__effect--2" id="first-footer-button"
+            href="../about_me_page/about.html"
+            data-text="Who am I?">
+            <span>A</span><span>b</span><span>o</span><span>u</span><span>t</span>
+            <span>&nbsp;</span><span>m</span><span>e</span>
+          </a>
+
+          <!-- Contact me -->
+          <a class="btn btn__effect--2" id="second-footer-button"
+            href="../about_me_page/about.html#contact"
+            data-text="mnikoleta78@gmail.com">
+            <span>C</span><span>o</span><span>n</span><span>t</span><span>a</span><span>c</span><span>t</span>
+            <span>&nbsp;</span><span>m</span><span>e</span>
+          </a>
+        </div>
+
+        <p class="footer-note"><span class="status-dot" aria-hidden="true"></span> AVAILABLE FOR INTERNSHIPS</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Homepage interactions are kept in a separate JavaScript file. -->
+  <script src="./homepage_only/script.js"></script>
+</body>
+</html>
